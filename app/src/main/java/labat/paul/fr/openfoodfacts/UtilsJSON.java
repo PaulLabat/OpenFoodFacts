@@ -138,18 +138,17 @@ public class UtilsJSON {
             h.put("protéines", tmp.getString("proteins_100g"));
             h.put("protéines portion", tmp.getString("proteins_serving"));
 
-            h.put("graisses", tmp.getString("fat_100g"));
-            h.put("graisses portion", tmp.getString("fat_serving"));
-
             h.put("sel", tmp.getString("salt_100g"));
             h.put("sel portion", tmp.getString("salt_serving"));
-
 
             h.put("acides gras saturés", tmp.getString("saturated-fat_100g"));
             h.put("acides gras saturés portion", tmp.getString("saturated-fat_serving"));
 
             h.put("fibres", tmp.getString("fiber_100g"));
             h.put("fibres portion", tmp.getString("fiber_serving"));
+
+            h.put("sel", tmp.getString("salt_100g"));
+            h.put("sel portion", tmp.getString("salt_serving"));
 
             h.put("énergie", tmp.getString("energy_100g"));
             h.put("énergie portion", tmp.getString("energy_serving"));
@@ -168,7 +167,7 @@ public class UtilsJSON {
             h.put("Sel", tmp.getString("salt"));
             h.put("Graisses", tmp.getString("fat"));
             h.put("Sucres", tmp.getString("sugars"));
-            h.put("Graisses saturées", tmp.getString("salt"));
+            h.put("Graisses saturées", tmp.getString("saturated-fat"));
 
             product.setNutrientLevels(h);
         } catch (JSONException e) {

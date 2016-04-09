@@ -17,6 +17,7 @@ public class ViewProduct extends AppCompatActivity {
             allergens, lables, categories, brands, packaging, traces,
             origin;
     TextView bareCode;
+    TextView salt, sugars, saturatedFat, fat;
 
     ImageView grade;
 
@@ -42,6 +43,10 @@ public class ViewProduct extends AppCompatActivity {
         traces = (TextView)findViewById(R.id.traces);
         origin = (TextView)findViewById(R.id.origin);
         grade = (ImageView)findViewById(R.id.grade);
+        fat = (TextView)findViewById(R.id.fat);
+        sugars = (TextView)findViewById(R.id.sugars);
+        salt = (TextView)findViewById(R.id.salt);
+        saturatedFat = (TextView)findViewById(R.id.saturated_fat);
 
         Intent intent = getIntent();
         if(intent.getStringExtra("data") != null){
@@ -91,10 +96,17 @@ public class ViewProduct extends AppCompatActivity {
             default:
         }
 
+        String tmp = currentProduct.getNutriments().get("graisses");
+        fat.setText(tmp+" Matières grasses / Lipides "+ currentProduct.getNutrientLevels().get("Graisses"));
 
+        tmp = currentProduct.getNutriments().get("sucres");
+        sugars.setText(tmp+" Sucres "+currentProduct.getNutrientLevels().get("Sucres"));
+
+        tmp = currentProduct.getNutriments().get("sel");
+        salt.setText(tmp+" Sel "+currentProduct.getNutrientLevels().get("Sel"));
+
+        tmp = currentProduct.getNutriments().get("acides gras saturés");
+        saturatedFat.setText(tmp+" Acide gras saturés "+currentProduct.getNutrientLevels().get("Graisses saturées"));
 
     }
-
-
-
 }
