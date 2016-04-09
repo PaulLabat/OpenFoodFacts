@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -12,8 +13,12 @@ import org.json.JSONObject;
 
 public class ViewProduct extends AppCompatActivity {
 
-    TextView productName, quantity, additives, ingredientsList, allergens, lables, categories, brands, packaging, traces;
+    TextView productName, quantity, additives, ingredientsList,
+            allergens, lables, categories, brands, packaging, traces,
+            origin;
     TextView bareCode;
+
+    ImageView grade;
 
     @Nullable
     private Product currentProduct;
@@ -35,6 +40,8 @@ public class ViewProduct extends AppCompatActivity {
         brands = (TextView)findViewById(R.id.brand);
         packaging = (TextView)findViewById(R.id.packaging);
         traces = (TextView)findViewById(R.id.traces);
+        origin = (TextView)findViewById(R.id.origin);
+        grade = (ImageView)findViewById(R.id.grade);
 
         Intent intent = getIntent();
         if(intent.getStringExtra("data") != null){
@@ -64,6 +71,25 @@ public class ViewProduct extends AppCompatActivity {
         additives.setText(currentProduct.getAdditives() == null ? "" : currentProduct.getAdditives().toString());
         ingredientsList.setText(currentProduct.getIngredient());
         bareCode.setText(currentProduct.getBareCode());
+        origin.setText(currentProduct.getOrigins());
+        switch (currentProduct.getNutritionGrade()){
+            case "a":
+                grade.setImageDrawable(getResources().getDrawable(R.drawable.nnc_a));
+                break;
+            case "b":
+                grade.setImageDrawable(getResources().getDrawable(R.drawable.nnc_b));
+                break;
+            case "c":
+                grade.setImageDrawable(getResources().getDrawable(R.drawable.nnc_c));
+                break;
+            case "d":
+                grade.setImageDrawable(getResources().getDrawable(R.drawable.nnc_d));
+                break;
+            case "e":
+                grade.setImageDrawable(getResources().getDrawable(R.drawable.nnc_e));
+                break;
+            default:
+        }
 
 
 
