@@ -1,6 +1,7 @@
 package labat.paul.fr.openfoodfacts;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RequestQueue mRequestQueue;
     EditText number;
 
+    public static Bitmap image;
+    public static Product currentProduct;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,9 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(JSONObject response) {
                 JSONObject res = UtilsJSON.checkIfProductFound(response);
                 if(res != null){
-                    Intent intent = new Intent(getApplicationContext(), ViewProduct.class);
-                    intent.putExtra("data", res.toString());
-                    startActivity(intent);
+                    currentProduct = UtilsJSON.createProductFromJson(res);
+                    getImage(currentProduct.getImageFrontUrl());
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -106,4 +110,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         getReqQueue().add(request);
     }
+
+    private void getImage(String url){
+        ImageRequest request = new ImageRequest(url, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                image = response;
+                Intent intent = new Intent(getApplicationContext(), ViewProduct.class);
+                startActivity(intent);
+            }
+        }, 0, 0, null,
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("resquest", error.getMessage());
+                    }
+                });
+        getReqQueue().add(request);
+    }
+
 }

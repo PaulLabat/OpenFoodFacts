@@ -1,6 +1,7 @@
 package labat.paul.fr.openfoodfacts;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -19,10 +20,11 @@ public class ViewProduct extends AppCompatActivity {
     TextView bareCode;
     TextView salt, sugars, saturatedFat, fat;
 
-    ImageView grade;
+    ImageView grade, productImage;
 
     @Nullable
     private Product currentProduct;
+    private Bitmap image;
 
 
     @Override
@@ -47,16 +49,10 @@ public class ViewProduct extends AppCompatActivity {
         sugars = (TextView)findViewById(R.id.sugars);
         salt = (TextView)findViewById(R.id.salt);
         saturatedFat = (TextView)findViewById(R.id.saturated_fat);
+        productImage = (ImageView)findViewById(R.id.product_image);
 
-        Intent intent = getIntent();
-        if(intent.getStringExtra("data") != null){
-            try {
-                currentProduct = UtilsJSON.createProductFromJson(new JSONObject(intent.getStringExtra("data")));
-            } catch (JSONException e) {
-                e.printStackTrace();
-                currentProduct = null;
-            }
-        }
+        currentProduct = MainActivity.currentProduct;
+        image = MainActivity.image;
 
         if(currentProduct != null)
             updateUI();
@@ -107,6 +103,12 @@ public class ViewProduct extends AppCompatActivity {
 
         tmp = currentProduct.getNutriments().get("acides gras saturés");
         saturatedFat.setText(tmp+" Acide gras saturés "+currentProduct.getNutrientLevels().get("Graisses saturées"));
+
+
+        if(image != null){
+            productImage.setImageBitmap(image);
+        }
+
 
     }
 }

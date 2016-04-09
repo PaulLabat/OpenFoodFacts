@@ -3,9 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<RelativeLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_image"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -14,7 +21,8 @@
             android:id="@+id/product_name"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_below="@+id/product_image"/>
 
         <TextView
             android:id="@+id/bare_code"
@@ -203,36 +211,38 @@
             android:layout_below="@+id/textView10"
             android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/Title"
-        android:text="Repères nutritionnels pour 100g"
-        android:id="@+id/textView11"
-        android:layout_below="@+id/textView10"
-        android:layout_marginTop="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Title"
+            android:text="Repères nutritionnels pour 100g"
+            android:id="@+id/textView11"
+            android:layout_below="@+id/textView10"
+            android:layout_marginTop="30dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/salt"
-        android:layout_below="@+id/textView11"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fat"
-        android:layout_below="@+id/salt"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sugars"
-        android:layout_below="@+id/fat"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/saturated_fat"
-        android:layout_below="@+id/sugars"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/salt"
+            android:layout_below="@+id/textView11"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fat"
+            android:layout_below="@+id/salt"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sugars"
+            android:layout_below="@+id/fat"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/saturated_fat"
+            android:layout_below="@+id/sugars"/>
 
-</RelativeLayout>
+
+
+    </RelativeLayout>
 
 </ScrollView>
